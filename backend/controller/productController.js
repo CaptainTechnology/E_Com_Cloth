@@ -28,7 +28,6 @@ async function addProduct(req, res) {
     }
 
     try {
-
         const image1 = req.files.image1 && req.files.image1[0];
         const image2 = req.files.image2 && req.files.image2[0];
         const image3 = req.files.image3 && req.files.image3[0];
@@ -40,6 +39,12 @@ async function addProduct(req, res) {
                 return result.secure_url;
             })
         )
+        if(imageUrl.length<0){
+            return res.json({
+                success:false,
+                message:"At least one image is required"+imageUrl.length
+            })
+        }
         const data = new ProductModel({
             name: name,
             description: description,
@@ -65,6 +70,7 @@ async function addProduct(req, res) {
     }
 
 }
+
 
 async function getProduct(req, res) {
     try {
@@ -93,7 +99,7 @@ async function removeProduct(req, res) {
             });
         }
 
-        const imageUrl = product.image;
+        const imageUrl = product.images;
 
         // Check if there are no images
         if (!imageUrl || imageUrl.length === 0) {

@@ -19,10 +19,10 @@ const userSchema = new mongoose.Schema({
         type:Array,
         default:[]
     },
-    orders:{
-        type:Array,
-        default:[]
-    }
+    // orders:{
+    //     type:Array,
+    //     default:[]
+    // }
 }); 
 
 const UserModel = mongoose.models.User || mongoose.model("User", userSchema);

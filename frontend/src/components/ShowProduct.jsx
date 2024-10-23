@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react'
 import { ShopContext } from '../context/ShopContext';
-import { toast } from 'react-toastify';
-import axios from 'axios';
+import { assets } from '../assets/assets';
+const ShowProduct = ({ product, cIndex, setCIndex }) => {
 
-const ShowProduct = ({ product }) => {
-  
-  const { setCart, cart ,token,backend_url,addCart} = useContext(ShopContext);
+  const { setCart, cart, token, backend_url, addCart,currency } = useContext(ShopContext);
   const [size, setSize] = useState("");
   return (
     <>
@@ -18,13 +16,14 @@ const ShowProduct = ({ product }) => {
                   src={product.image[index]}
                   className="w-[24%] sm:w-full sm:mb-3 flex-shrink-0 cursor-pointer"
                   alt=""
+                  onClick={() => { setCIndex(index) }}
                 />
               ))
             }
           </div>
           <div className="w-full sm:w-[80%]">
             <img
-              src={product.image[0]}
+              src={product.image[cIndex]}
               className="w-full h-auto"
               alt=""
             />
@@ -44,8 +43,13 @@ const ShowProduct = ({ product }) => {
             }
 
             <p className="pl-2">(122)</p>
+            <img className="ml-2 w-3" src={assets.star_icon}/>
+            <img className="w-3" src={assets.star_icon}/>
+            <img className="w-3" src={assets.star_icon}/>
+            <img className="w-3" src={assets.star_icon}/>
+            <img className="w-3" src={assets.star_dull_icon}/>
           </div>
-          <p className="mt-5 text-3xl font-medium">${product.price}</p>
+          <p className="mt-5 text-3xl font-medium">{currency}{product.price}</p>
           <p className="mt-5 text-gray-500 md:w-4/5">
             {product.description}
           </p>
@@ -60,32 +64,32 @@ const ShowProduct = ({ product }) => {
               </button>
               <button
                 onClick={() => setSize("M")}
-                className={`border py-2 px-4 ${size === "M" ?  "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
+                className={`border py-2 px-4 ${size === "M" ? "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
               >
                 M
               </button>
               <button
                 onClick={() => setSize("L")}
-                className={`border py-2 px-4 ${size === "L" ?  "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
+                className={`border py-2 px-4 ${size === "L" ? "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
               >
                 L
               </button>
               <button
                 onClick={() => setSize("XL")}
-                className={`border py-2 px-4 ${size === "XL" ?  "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
+                className={`border py-2 px-4 ${size === "XL" ? "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
               >
                 XL
               </button>
               <button
                 onClick={() => setSize("XXL")}
-                className={`border py-2 px-4 ${size === "XXL" ?  "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
+                className={`border py-2 px-4 ${size === "XXL" ? "border-orange-500 bg-gray-100" : "bg-gray-100 "}`}
               >
                 XXL
               </button>
 
             </div>
           </div>
-          <button onClick={() => { addCart(size,product) }} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
+          <button onClick={() => { addCart(size, product) }} className="bg-black text-white px-8 py-3 text-sm active:bg-gray-700">ADD TO CART</button>
           <hr className="mt-8 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original product.</p>
@@ -180,17 +184,18 @@ export default ShowProduct
    
     if (isAvailable) {
       cartData={...product,size:size,quantity:2}
-        // setCart(prev => (
-        //     prev.map(item => item._id === product._id && item.size === size
-        //             ? { ...item, quantity: item.quantity + 1 } 
-        //             : item
-        //     )
-        // ));
+        setCart(prev => (
+            prev.map(item => item._id === product._id && item.size === size
+                    ? { ...item, quantity: item.quantity + 1 } 
+                    : item
+            )
+        ));
 
     } else {
-        // setCart(prev => ([
-        //     ...prev,
-        //     { ...product, size: size, quantity: 1 }
-        // ]));
+        setCart(prev => ([
+            ...prev,
+            { ...product, size: size, quantity: 1 }
+        ]));
       cartData={...product,size:size,quantity:1};
-    } */
+    } 
+      */

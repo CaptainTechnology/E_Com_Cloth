@@ -1,3 +1,4 @@
+
 import UserModel from "../model/userModel.js";
 
 
@@ -22,7 +23,6 @@ const Add = async (req, res) => {
             const upladte_cart = await user.cart.map(item => item._id === cartData._id && item.size === cartData.size
                 ? { ...item, quantity: item.quantity + 1}
                 : item)
-            console.log(upladte_cart)
             const edituser = await UserModel.findByIdAndUpdate(
                 userId,
                  { cart: upladte_cart } , // Use $push to add to the cart array

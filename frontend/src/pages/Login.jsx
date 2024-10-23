@@ -10,9 +10,9 @@ const Login = () => {
   console.log(backend_url)
   const [state, setState] = useState("Login");
   const [data,setData]=useState({
-    name:"",
-    email:"",
-    password:""
+    name:"captain jack",
+    email:"captain@gmail.com",
+    password:"captain@123"
   })
   const form_handler=(e)=>{
     const {name,value}=e.target;

@@ -6,8 +6,13 @@ import Search from '../components/Search';
 
 const Collection = () => {
 
-  const { products, search,searchValue } = useContext(ShopContext);
+  const { products, search,searchValue,fetch_product,currency} = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
+  const [isFilter,setIsfilter]=useState(false);
+
+  useEffect(()=>{
+  fetch_product();
+  },[])
   const [order,setOrder]=useState("")
   const [category, setCategory] = useState({
     Men: "",
@@ -22,6 +27,7 @@ const Collection = () => {
   });
 
   const category_handler = (e) => {
+    setIsfilter(true);
     const { name, value } = e.target;
     if (e.target.checked) {
       setCategory(prev => ({
@@ -38,6 +44,7 @@ const Collection = () => {
   }
 
   const subCategory_handler = (e) => {
+    setIsfilter(true)
     const { name, value } = e.target;
     if (e.target.checked) {
       setSubCategory(prev => ({
@@ -155,6 +162,7 @@ const Collection = () => {
             </div>
             <select className="border-2 border-gray-300 text-sm px-2" onChange={(e)=>{
               setOrder(e.target.value);
+              setIsfilter(true);
             }}>
               <option value="relevant">Sort by: Relevant</option>
               <option value="low-high">Sort by: Low to High</option>
@@ -162,13 +170,13 @@ const Collection = () => {
             </select>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6">
-            {filterProduct.map((product, index) => (
+            {(isFilter?filterProduct:products).map((product, index) => (
               <Link key={index} onClick={() => scroll(0, 0)} className="text-gray-700 cursor-pointer" to={`/product/${product._id}`}>
                 <div className="overflow-hidden">
                   <img className="hover:scale-110 transition ease-in-out" src={product.image[0]} alt="" />
                 </div>
                 <p className="pt-3 pb-1 text-sm">{product.name}</p>
-                <p className="text-sm font-medium">${product.price}</p>
+                <p className="text-sm font-medium">{currency}{product.price}</p>
               </Link>
             ))}
           </div>

@@ -1,24 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { assets } from '../assets/assets';
-import { useNavigate} from 'react-router-dom'
+import { Link, useNavigate} from 'react-router-dom'
 import axios from 'axios'
 import { ShopContext } from '../context/ShopContext';
 
 const Cart = () => {
 
-  const {cart,remove_cart_item, setCart,backend_url,edit_cart } = useContext(ShopContext);
+  const {cart,remove_cart_item, setCart,backend_url,edit_cart,tempCart,token,setToken,currency } = useContext(ShopContext);
   const [total, setTotal] = useState(0);
-  const {token}=useContext(ShopContext)
   
   const navigate=useNavigate();
  
   useEffect(() => {
     let fees = 0;
-    cart.forEach(item => {
+    (token?cart:tempCart).forEach(item => {
       fees += item.price * item.quantity;
     });
     setTotal(fees);
-  }, [cart]);
+  }, [cart,tempCart,setToken]);
 
   return (
     <div className="border-t pt-14">
@@ -29,15 +28,14 @@ const Cart = () => {
         </div>
       </div>
       <div>
-        {
-          cart.map((item, index) => (
+        {(token?cart:tempCart).map((item, index) => (
             <div key={index} className="py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4">
               <div className="flex items-start gap-6">
-                <img className="w-16 sm:w-20"  src={`${backend_url}/api/product/images${item.image[0]}`} alt={`${backend_url}/${item.image[0]}`} />
+                <img className="w-16 sm:w-20"  src={item.image[0]} alt="" />
                 <div>
                   <p className="text-xs sm:text-lg font-medium">{item.name}</p>
                   <div className="flex items-center gap-5 mt-2">
-                    <p>${item.price}</p>
+                    <p>{currency}{item.price}</p>
                     <p className="px-2 sm:px-3 sm:py-1 border bg-slate-50">{item.size}</p>
                   </div>
                 </div>
@@ -72,17 +70,17 @@ const Cart = () => {
             <div className="flex flex-col gap-2 mt-2 text-sm">
               <div className="flex justify-between">
                 <p>Subtotal</p>
-                <p>$ {total}</p>
+                <p>{currency} {total}</p>
               </div>
               <hr />
               <div className="flex justify-between">
                 <p>Shipping Fee</p>
-                <p>$ {total > 0 ? 10 : 0} </p>
+                <p>{currency} {total > 0 ? 10 : 0} </p>
               </div>
               <hr />
               <div className="flex justify-between">
                 <b>Total</b>
-                <b>$ {total > 0 ? total + 10 : 0} </b>
+                <b>{currency} {total > 0 ? total + 10 : 0} </b>
               </div>
             </div>
           </div>
