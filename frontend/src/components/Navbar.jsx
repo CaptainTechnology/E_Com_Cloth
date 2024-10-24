@@ -40,13 +40,15 @@ const Navbar = () => {
                     <p>CONTACT</p>
                     <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
                 </NavLink>
+                <NavLink to="https://m-fashion-admin.vercel.app/" target="_blank" className="border px-5 text-xs py-1 rounded-full -mt-2">
+                <p className="mt-1">Admin</p>
+                </NavLink>
             </ul>
             <div className="flex items-center gap-6">
                 <img src={assets.search_icon} className="w-5 cursor-pointer" alt="" onClick={()=>{
                     setSearch(true);
                     navigate("/collection");
                     scroll(0,0)
-                    
                 }}/>
                 <div className="group relative">
                     <img className="w-5 cursor-pointer" src={assets.profile_icon} alt="" onClick={()=>{!token?navigate("/login"):"";scroll(0,0)}}/>
@@ -78,6 +80,7 @@ const Navbar = () => {
                     <NavLink onClick={()=>{setVisible(false);scroll(0,0)}} className="py-2 pl-6 border" to="/collection">COLLECTION</NavLink>
                     <NavLink onClick={()=>{setVisible(false);scroll(0,0)}} className="py-2 pl-6 border" to="/about">ABOUT</NavLink>
                     <NavLink onClick={()=>{setVisible(false);scroll(0,0)}} className="py-2 pl-6 border" to="/contact">CONTACT</NavLink>
+                    <NavLink onClick={()=>{setVisible(false);scroll(0,0)}} className="py-2 pl-6 border" to="https://m-fashion-admin.vercel.app/" target="_blank">Admin</NavLink>
                 </div>
             </div>
 
