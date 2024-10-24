@@ -24,9 +24,9 @@ const App = () => {
     </div>
     <div className="ml-[20%] w-[70%] mx-auto my-8 text-gray-600 text-base">
       <Routes>
-        <Route path='/add' element={<Add />} />
-        <Route path='/list' element={<List />} />
-        <Route path='/orders' element={<Orders />} />
+        <Route path='/add' element={<Add/>} />
+        <Route path='/list' element={<List/>} />
+        <Route path='/orders' element={<Orders/>} />
       </Routes>
     </div>
   </div>
