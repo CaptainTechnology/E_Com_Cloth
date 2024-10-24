@@ -8,8 +8,7 @@ import { toast } from 'react-toastify'
 const PlaceOrder = () => {
   const [paymetMethod, setPaymetMethodd] = useState("COD")
   const { cart, setOrders, backend_url, token, remove_cart, fetch_order, delevery_charge, tempCart, currency } = useContext(ShopContext);
- 
-
+  const navigate=useNavigate();
   const [total, setTotal] = useState(0);
   
  
