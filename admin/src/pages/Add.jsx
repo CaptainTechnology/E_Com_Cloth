@@ -8,9 +8,6 @@ import { toast } from 'react-toastify';
 const Add = () => {
 
   const backend_url=import.meta.env.VITE_BACKED_URL;
-  console.log(backend_url);
-  
-
   const [size,setSize]=useState({
     S:false,
     M:false,
@@ -89,7 +86,7 @@ const Add = () => {
         form_data.append("image3", images.image3);
         form_data.append("image4", images.image4);
       
-        const response = await axios.post("http://localhost:4000/api/product/add", form_data, {
+        const response = await axios.post(backend_url+"/api/product/add", form_data, {
             headers: {
                 'Content-Type': 'multipart/form-data' // Ensure the correct content type is set
             }

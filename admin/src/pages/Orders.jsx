@@ -5,8 +5,7 @@ import { act } from 'react';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
-  const token = localStorage.getItem("token");
-  const backend_url="http://localhost:4000"
+  const backend_url=import.meta.env.VITE_BACKED_URL;
   const fetch_order = async () => {
     try {
       const response = await axios.get(backend_url+'/api/order/getAdmin', {});

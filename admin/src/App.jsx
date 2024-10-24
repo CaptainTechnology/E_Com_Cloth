@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
-import { assets } from './assets/assets'
 import Sidebar from './components/Sidebar'
 import Add from './pages/Add'
 import List from './pages/List'
-import Orders from './pages/orders'
+import Orders from './pages/Orders'
 import Login from './pages/Login'
 
 const App = () => {
