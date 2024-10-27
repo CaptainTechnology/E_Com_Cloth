@@ -62,7 +62,7 @@ const Orders = () => {
               <p>Payment : {order.status==="Delivered"?"Done":"Pending"}</p>
               <p>Date : {order.date}</p>
             </div>
-            <p className="text-sm sm:text-[15px]">${order.ammount}</p>
+            <p className="text-sm sm:text-[15px]">₹{order.ammount}</p>
             <select className="p-2 font-semibold" value={order.status} onChange={(e)=>{update_order(order._id,e.target.value)}}>
               <option value="Order Placed">Order Placed</option>
               <option value="Packing">Packing</option>

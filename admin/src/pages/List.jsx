@@ -59,7 +59,7 @@ const List = () => {
             <img className="w-12" src={item.image[0]}  />
             <p>{item.name}</p>
             <p>{item.category}</p>
-            <p>${item.price}</p>
+            <p>₹{item.price}</p>
             <img src={assets.del} className="text-right md:text-center cursor-pointer text-lg w-5" onClick={()=>{index>52?delete_product(item._id):toast.error("Admin product can't be deleted")}}/>
           </div>
         ))
